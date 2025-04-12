@@ -1,7 +1,7 @@
 <template>
     <div class="home-page">
         <TagSelector @tag-change="handleTagSelectorChange" />
-        <ContentTags @tag-change="handleContentTagsChange" @print-tags="printSelectedTags" />
+        <ContentTags @print-tags="printSelectedTags" />
         <!-- 传递 videos 和 isLoading 数据给 VideoGallery 组件 -->
         <VideoGallery :videos="videos" :isLoading="isLoading" />
     </div>
@@ -26,55 +26,34 @@ export default {
             contentTagsTags: [],
             videos: [], // 存储从后端获取的视频数据
             isLoading: false,
-            xhs_base_url: 'https://www.xiaohongshu.com/explore/' // 定义 xhs_base_url
         };
     },
     methods: {
         handleTagSelectorChange(tags) {
             this.tagSelectorTags = tags;
         },
-        handleContentTagsChange(tags) {
-            this.contentTagsTags = tags;
-        },
         async printSelectedTags() {
             this.videos = [];
             this.isLoading = true;
+            try {
+                // 发送 POST 请求
+                const response = await axios.post('http://127.0.0.1:3000/api/scrape', {
+                    tags: this.tagSelectorTags
+                });
 
-            // 转换 tagSelectorTags 为字符串
-            const keywords = this.tagSelectorTags.join(',');
-
-            // 逐个发送 POST 请求
-            for (const platform of this.contentTagsTags) {
-                try {
-                    const response = await axios.post('http://127.0.0.1:5000/start_crawler', {
-                        PLATFORM: platform,
-                        KEYWORDS: keywords
-                    });
-
-                    // 提取响应中的结果并添加 source 和 link 字段
-                    const newVideos = response.data.results.map(video => {
-                        const videoData = {
-                            ...video,
-                            source: platform // 添加 source 字段
-                        };
-
-                        // 如果平台为 'xhs'，添加 link 属性
-                        if (platform === 'xhs') {
-                            videoData.link = `${this.xhs_base_url}${video.note_id}?xsec_token=${video.xsec_token}`;
-                        }
-
-                        return videoData;
-                    });
-
-                    // 更新视频数据
-                    this.videos = [...this.videos, ...newVideos];
-                } catch (error) {
-                    console.error(`请求 ${platform} 失败:`, error);
-                }
+                // 遍历响应中的每个对象的 result 数组，并将其扁平化加入到 this.videos 中
+                response.data.forEach(item => {
+                    if (Array.isArray(item.result)) {
+                        this.videos.push(...item.result);
+                    }
+                });
+            } catch (error) {
+                console.error('请求失败:', error);
+            } finally {
+                this.isLoading = false; // 确保无论请求成功或失败都停止加载状态
             }
-
-            this.isLoading = false;
         }
+
     }
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
     <footer class="footer">
         <div class="footer-content">
-            <p class="copyright">© 2025 Better Surf. 开源项目，MIT 许可证.</p>
+            <p class="copyright">© 2025 bilibili-crawler. 开源项目，MIT 许可证.</p>
             <div class="contact-info">
                 <p>邮箱: <a :href="'mailto:' + email">{{ email }}</a></p>
             </div>
@@ -22,17 +22,29 @@ export default {
 <style scoped>
 .footer {
     background: #272727;
-    /* 深色背景 */
     color: #838383;
-    /* 白色文字 */
     padding: 20px;
     text-align: left;
-    /* 修改为左对齐 */
+    position: fixed;
+    /* 固定定位 */
+    bottom: 0;
+    /* 距离底部0 */
+    left: 0;
+    /* 距离左边0 */
+    width: 100%;
+    /* 宽度为100% */
+    margin: 0;
+    /* 确保没有外边距 */
+    box-sizing: border-box;
+    /* 包含内边距和边框在内的宽度计算 */
 }
 
 .footer-content {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0;
+    /* 确保没有外边距 */
+    padding: 0 20px;
+    /* 添加内边距以保持内容与边缘的距离 */
 }
 
 .copyright {

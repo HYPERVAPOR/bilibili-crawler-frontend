@@ -253,4 +253,45 @@ input:focus {
     width: 80%;
     margin: 20px auto;
 }
+
+@media (max-width: 600px) {
+    .tag-selector {
+        padding: 10px;
+        /* 增加内边距 */
+    }
+
+    .categories {
+        flex-direction: column;
+        /* 垂直排列类别 */
+        align-items: center;
+        /* 中心对齐 */
+        width: 100%;
+        /* 宽度100% */
+    }
+
+    .category {
+        flex-grow: 0;
+        /* 不再扩展 */
+        width: 100%;
+        /* 宽度100% */
+        margin-bottom: 15px;
+        /* 类别之间的间隔 */
+    }
+
+    .tags {
+        flex-wrap: wrap;
+        /* 标签换行 */
+        justify-content: center;
+        /* 标签居中 */
+    }
+
+    .tag {
+        padding: 10px 8px;
+        /* 减小内边距 */
+        font-size: 14px;
+        /* 调整字体大小 */
+        height: auto;
+        /* 高度自适应 */
+    }
+}
 </style>

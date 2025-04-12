@@ -1,7 +1,7 @@
 <template>
     <nav>
         <div class="logo" @click="goHome">
-            <img src="@/assets/better-surf.png" alt="My Logo" />
+            <img src="@/assets/crawler.png" alt="My Logo" />
         </div>
         <div class="nav-buttons" ref="navButtons">
             <button ref="homeBtn" @click="goHome" :class="{ active: currentPage === 'Home' }">首页</button>
@@ -12,7 +12,7 @@
                 left: underlineStyle.left + 'px'
             }"></div>
         </div>
-        <a href="https://github.com/HYPERVAPOR/better-surf" target="_blank" rel="noopener noreferrer"
+        <a href="https://github.com/HYPERVAPOR/bilibili-crawler" target="_blank" rel="noopener noreferrer"
             class="github-button">
             <img src="@/assets/github-mark-white.svg" alt="GitHub" />
         </a>

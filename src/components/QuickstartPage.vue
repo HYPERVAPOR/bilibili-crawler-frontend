@@ -21,6 +21,7 @@
 </template>
 
 <script>
+/* 保持 script 部分不变 */
 import { marked } from 'marked';
 
 const slugify = (text) =>
@@ -99,6 +100,7 @@ export default {
     }
 };
 </script>
+
 <style>
 .quickstart-page {
     display: flex;
@@ -111,21 +113,98 @@ export default {
 
 .sidebar {
     position: fixed;
-    /* 固定在页面 */
     top: 120px;
-    /* 距离顶部的距离 */
     left: 0;
-    /* 靠左对齐 */
     width: 260px;
     height: 75%;
-    /* 高度为视口高度减去上下的padding */
     overflow-y: auto;
-    /* 超出部分可滚动 */
     border-right: 1px solid rgb(79, 79, 79);
     padding: 0 30px;
     flex-shrink: 0;
 }
 
+.content {
+    flex: 1;
+    margin-left: 280px;
+    padding: 0 40px;
+    text-align: left;
+    max-width: 800px;
+    line-height: 2;
+}
+
+.content pre {
+    background-color: #f6f8fa;
+    /* GitHub 风格的背景色 */
+    color: #24292e;
+    /* 字体颜色 */
+    padding: 16px;
+    /* 内边距 */
+    border-radius: 3px;
+    /* 圆角 */
+    overflow-x: auto;
+    /* 超出部分水平滚动 */
+    border: 1px solid #e1e4e8;
+    /* 边框颜色 */
+    white-space: pre;
+    /* 保持空白符 */
+}
+
+.content code {
+    background-color: #f6f8fa;
+    /* 行内代码背景色 */
+    padding: 0.2em 0.4em;
+    /* 内边距 */
+    border-radius: 3px;
+    /* 圆角 */
+    color: #bababa;
+    /* 行内代码字体颜色 */
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    /* 字体 */
+}
+
+/* 新增移动端样式 */
+@media screen and (max-width: 768px) {
+    .quickstart-page {
+        flex-direction: column;
+        margin-top: 80px;
+        padding: 15px 0;
+    }
+
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 0 20px;
+        border-right: none;
+        border-bottom: 1px solid rgb(79, 79, 79);
+    }
+
+    .sidebar h2 {
+        font-size: 1.2em;
+        padding: 15px 0;
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    .section-header {
+        padding: 12px 8px;
+    }
+
+    .sub-sections a {
+        padding: 10px 16px;
+        font-size: 0.9em;
+    }
+
+    .toggle-icon {
+        font-size: 1.1em;
+    }
+}
+
+/* 保持其他原有样式不变 */
 .sidebar h2 {
     font-size: 1.4em;
     margin-bottom: 20px;
@@ -175,15 +254,6 @@ export default {
 .sub-sections a:hover {
     color: #fff;
     background-color: rgba(255, 255, 255, 0.05);
-}
-
-.content {
-    flex: 1;
-    margin-left: 280px;
-    /* 给内容留出空间 */
-    padding: 0 40px;
-    text-align: left;
-    max-width: 800px;
 }
 
 .content h1 {
