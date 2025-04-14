@@ -89,7 +89,7 @@ export default {
     position: relative;
     border-radius: 12px;
     transition: transform 0.3s, box-shadow 0.3s;
-    background: #1c1c1c;
+    background: #181D24;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     display: flex;
     min-height: 180px;
@@ -161,7 +161,7 @@ export default {
 }
 
 .content-author {
-    color: #888;
+    color: #B6AEA2;
     font-size: 14px;
     margin: 0 0 12px 0;
 }
@@ -170,7 +170,7 @@ export default {
     display: flex;
     gap: 20px;
     font-size: 13px;
-    color: #666;
+    color: #B6AEA2;
     margin-top: auto;
     align-items: center;
     line-height: 0px;
@@ -185,7 +185,7 @@ export default {
 .skeleton-item {
     position: relative;
     border-radius: 12px;
-    background: #1c1c1c;
+    background: #181D24;
     display: flex;
     min-height: 180px;
     overflow: hidden;
@@ -194,7 +194,7 @@ export default {
 .skeleton-cover {
     flex: 0 0 320px;
     height: 180px;
-    background: #2a2a2a;
+    background: #27303b;
 }
 
 .skeleton-info {
@@ -208,7 +208,7 @@ export default {
 .skeleton-logo {
     width: 44px;
     height: 24px;
-    background: #2a2a2a;
+    background: #27303b;
     position: absolute;
     right: 24px;
     top: 20px;
@@ -217,14 +217,14 @@ export default {
 .skeleton-title {
     width: 70%;
     height: 24px;
-    background: #2a2a2a;
+    background: #27303b;
     margin-top: 8px;
 }
 
 .skeleton-author {
     width: 40%;
     height: 16px;
-    background: #2a2a2a;
+    background: #27303b
 }
 
 .skeleton-meta {
@@ -255,7 +255,7 @@ export default {
 .empty-state {
     text-align: center;
     padding: 40px;
-    color: #666;
+    color: #111519
 }
 
 .video-gallery {

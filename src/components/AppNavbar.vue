@@ -93,10 +93,9 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    background: linear-gradient(to right, #232323, #000);
-    color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px 20px;
+    background: #070A0E;
+
 
     position: fixed;
     /* 设置为固定定位 */
@@ -125,7 +124,7 @@ nav {
     position: relative;
     padding: 8px 18px;
     font-size: 20px;
-    color: white;
+    color: #D9F2FF;
     background: transparent;
     border: none;
     border-radius: 20px;

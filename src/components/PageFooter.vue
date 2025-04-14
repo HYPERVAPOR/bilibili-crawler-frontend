@@ -21,11 +21,11 @@ export default {
 
 <style scoped>
 .footer {
-    background: #272727;
-    color: #838383;
+    background: #111519;
+    color: #B6AEA2;
     padding: 20px;
     text-align: left;
-    position: fixed;
+    position: relative;
     /* 固定定位 */
     bottom: 0;
     /* 距离底部0 */
@@ -37,6 +37,7 @@ export default {
     /* 确保没有外边距 */
     box-sizing: border-box;
     /* 包含内边距和边框在内的宽度计算 */
+    font-size: smaller;
 }
 
 .footer-content {
@@ -49,16 +50,16 @@ export default {
 
 .copyright {
     margin: 0;
-    font-size: 14px;
+
 }
 
 .contact-info p {
     margin: 5px 0;
-    font-size: 14px;
+
 }
 
 .contact-info a {
-    color: #838383;
+    color: #B6AEA2;
     /* 链接颜色 */
     text-decoration: none;
 }

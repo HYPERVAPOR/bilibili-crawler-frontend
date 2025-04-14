@@ -134,7 +134,7 @@ export default {
 }
 
 h3 {
-    color: #fff;
+    color: #D9F2FF;
     margin-bottom: 10px;
 }
 

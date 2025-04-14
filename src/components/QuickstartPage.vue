@@ -21,8 +21,9 @@
 </template>
 
 <script>
-/* 保持 script 部分不变 */
 import { marked } from 'marked';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/atom-one-dark.css';
 
 const slugify = (text) =>
     text.toLowerCase()
@@ -39,16 +40,21 @@ export default {
     async mounted() {
         try {
             const response = await fetch('quickstart.md');
-            if (!response.ok) {
-                throw new Error('无法获取 Markdown 文件');
-            }
+            if (!response.ok) throw new Error('无法获取 Markdown 文件');
             const markdown = await response.text();
+            marked.setOptions({
+                headerIds: true,
+                slugify,
+                highlight: (code, lang) => {
+                    console.log('Highlighting:', lang);
+                    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+                    return hljs.highlight(code, { language }).value;
+                }
+            });
 
-            // 解析导航结构
             const tokens = marked.lexer(markdown);
             let currentSection = null;
             const sections = [];
-
             tokens.forEach(token => {
                 if (token.type === 'heading') {
                     if (token.depth === 1) {
@@ -60,9 +66,8 @@ export default {
                         };
                         sections.push(currentSection);
                     } else if (token.depth === 2 && currentSection) {
-                        const childId = slugify(token.text);
                         currentSection.children.push({
-                            id: childId,
+                            id: slugify(token.text),
                             title: token.text
                         });
                     }
@@ -70,16 +75,14 @@ export default {
             });
 
             this.sections = sections;
+            this.markdownContent = marked(markdown);
 
-            // 生成HTML内容时，为每个标题添加 ID
-            marked.setOptions({
-                headerIds: true,
-                slugify
+            this.$nextTick(() => {
+                document.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightElement(block);
+                });
             });
-            this.markdownContent = marked(markdown).replace(/<h([1-2])>(.*?)<\/h\1>/g, (match, depth, title) => {
-                const id = slugify(title);
-                return `<h${depth} id="${id}">${title}</h${depth}>`;
-            });
+
         } catch (error) {
             console.error('加载 Markdown 文件时出错:', error);
         }
@@ -104,8 +107,8 @@ export default {
 <style>
 .quickstart-page {
     display: flex;
-    background-color: #202020;
-    color: #ffffff;
+    background-color: #111519;
+    color: #D9F2FF;
     min-height: 100vh;
     padding: 30px 0;
     margin-top: 100px;
@@ -133,36 +136,22 @@ export default {
 }
 
 .content pre {
-    background-color: #f6f8fa;
-    /* GitHub 风格的背景色 */
-    color: #24292e;
-    /* 字体颜色 */
+    background-color: #181D24;
     padding: 16px;
-    /* 内边距 */
     border-radius: 3px;
-    /* 圆角 */
     overflow-x: auto;
-    /* 超出部分水平滚动 */
-    border: 1px solid #e1e4e8;
-    /* 边框颜色 */
-    white-space: pre;
-    /* 保持空白符 */
+    margin: 1em 0;
 }
 
-.content code {
-    background-color: #f6f8fa;
-    /* 行内代码背景色 */
-    padding: 0.2em 0.4em;
-    /* 内边距 */
-    border-radius: 3px;
-    /* 圆角 */
-    color: #bababa;
-    /* 行内代码字体颜色 */
-    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-    /* 字体 */
+.content pre code {
+    padding: 0;
+    background-color: transparent;
+    color: inherit;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
-/* 新增移动端样式 */
 @media screen and (max-width: 768px) {
     .quickstart-page {
         flex-direction: column;
@@ -204,7 +193,6 @@ export default {
     }
 }
 
-/* 保持其他原有样式不变 */
 .sidebar h2 {
     font-size: 1.4em;
     margin-bottom: 20px;

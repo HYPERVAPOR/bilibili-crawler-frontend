@@ -37,7 +37,7 @@ export default {
             this.isLoading = true;
             try {
                 // 发送 POST 请求
-                const response = await axios.post('http://127.0.0.1:3000/api/scrape', {
+                const response = await axios.post('http://47.109.190.32:3001/api/scrape', {
                     tags: this.tagSelectorTags
                 });
 
@@ -59,13 +59,10 @@ export default {
 </script>
 <style>
 .home-page {
-    background-color: #202020;
-    /* 深色背景 */
-    color: #ffffff;
-    /* 白色字体 */
+    background-color: #111519;
+    color: #D9F2FF;
     padding: 20px;
     min-height: 100vh;
-    /* 使页面至少占满视口高度 */
     margin-top: 100px;
 
 }
