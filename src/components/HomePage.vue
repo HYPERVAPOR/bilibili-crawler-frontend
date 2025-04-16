@@ -37,7 +37,7 @@ export default {
             this.isLoading = true;
             try {
                 // 发送 POST 请求
-                const response = await axios.post('http://47.109.190.32:3001/api/scrape', {
+                const response = await axios.post('https://www.hypervapor.cloud/api/scrape', {
                     tags: this.tagSelectorTags
                 });
 
