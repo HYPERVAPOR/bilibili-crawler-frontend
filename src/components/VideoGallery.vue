@@ -28,7 +28,7 @@
                                 <img :src="video.cover" :alt="video.title" class="content-cover" />
                             </div>
                             <div class="info-container">
-                                <img src="/assets/Bilibili_logo.svg" class="platform-logo" />
+                                <img src="@/assets/Bilibili_logo.svg" class="platform-logo" />
                                 <h3 class="content-title">{{ video.title }}</h3>
                                 <p class="content-author">{{ video.author || '未知作者' }}</p>
                                 <div class="meta-container">
